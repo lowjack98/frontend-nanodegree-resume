@@ -9,12 +9,12 @@ var bio = {
     "github": "lowjack98",
     "twitter": "@jaylowack",
     "location": "Fort Worth, TX US",
-  },
-  "biopic": "images/me.jpg",
+    },
+  "welomeMessage": "What's up fellow Udacians?",
   "skills": [
     "awesomeness", "delivering things", "cryogenic sleep", "saving the universe"
   ],
-  "welomeMessage": "What's up fellow Udacians?",
+  "biopic": "images/me.jpg",
   display: function (){
     $("#header").prepend(HTMLheaderRole.replace("%data%",bio.role));
     $("#header").prepend(HTMLheaderName.replace("%data%",inName(bio.name)));
@@ -34,73 +34,6 @@ var bio = {
         $("#skills").append(HTMLskills.replace("%data%",skill));
       });
     }
-  }
-};
-
-var work = {
-  "jobs": [
-    {
-      "employer": "AT&T",
-      "title": "Senior Network Support",
-      "location": "Dallas, TX, US",
-      "dates": "1999 - Present",
-      "description": "Network Operations Tooling"
-    },
-    {
-      "employer": "US Navy",
-      "title": "R6 1NCR, LCDR",
-      "location": "Port Hueneme, CA, US",
-      "dates": "2001 - Present",
-      "description": "Civil Engineering"
-    }
-  ],
-  display: function(){
-    $.each(work.jobs, function(pk,pv){
-      $("#work").append(HTMLworkStart);
-      $(".work-entry:last").append(HTMLworkEmployer.replace("%data%",pv.employer) + HTMLworkTitle.replace("%data%",pv.title));
-      $(".work-entry:last").append(HTMLworkDates.replace("%data%",pv.dates));
-      $(".work-entry:last").append(HTMLworkLocation.replace("%data%",pv.location));
-      $(".work-entry:last").append(HTMLworkDescription.replace("%data%",pv.description));
-    });
-  }
-};
-
-var projects = {
-  project: [
-    {
-      title: "Portfolio",
-      dates: "Jan 2016",
-      description: "Portfolio Pjoject# 1: Front-End Developer, Udacity",
-      images: [
-        {
-          url: "images/fry.jpg"
-        }
-      ]
-    },
-    {
-      title: "Resume",
-      dates: "Feb 2016",
-      description: "Resume Pjoject# 2: Front-End Developer, Udacity",
-      images: [
-        {
-          url: "images/fry.jpg"
-        },
-        {
-          url: "images/197x148.gif"
-        }
-      ]
-    }
-  ],
-  display: function(){
-    $.each(projects.project, function(pk,pv){
-      $("#projects").append(HTMLprojectStart);
-      $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",pv.title));
-      $(".project-entry:last").append(HTMLprojectDates.replace("%data%",pv.dates));
-      $(".project-entry:last").append(HTMLprojectDescription.replace("%data%",pv.description));
-      $.each(pv.images, function(ik,iv){
-        $(".project-entry:last").append(HTMLprojectImage.replace("%data%",iv.url));
-      });
-    });
   }
 };
 
@@ -141,6 +74,84 @@ var education = {
   }
 };
 
+var work = {
+  "jobs": [
+    {
+      "employer": "AT&T",
+      "title": "Senior Network Support",
+      "location": "Dallas, TX, US",
+      "dates": "1999 - Present",
+      "description": "Network Operations Tooling"
+    },
+    {
+      "employer": "US Navy",
+      "title": "R6 1NCR, LCDR",
+      "location": "Port Hueneme, CA, US",
+      "dates": "2001 - Present",
+      "description": "Civil Engineering"
+    }
+  ],
+  display: function(){
+    $.each(work.jobs, function(pk,pv){
+      $("#work").append(HTMLworkStart);
+      $(".work-entry:last").append(HTMLworkEmployer.replace("%data%",pv.employer) + HTMLworkTitle.replace("%data%",pv.title));
+      $(".work-entry:last").append(HTMLworkDates.replace("%data%",pv.dates));
+      $(".work-entry:last").append(HTMLworkLocation.replace("%data%",pv.location));
+      $(".work-entry:last").append(HTMLworkDescription.replace("%data%",pv.description));
+    });
+  }
+};
+
+var projects = {
+  project: [
+    {
+      title: "Portfolio",
+      dates: "Jan 2016",
+      description: "Portfolio Project# 1: Front-End Developer, Udacity",
+      images: [
+        {
+          url: "images/fry.jpg"
+        }
+      ],
+      display: function(idx){
+        var curProject = projects.project[idx];
+        $("#projects").append(HTMLprojectStart);
+        $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",curProject.title));
+        $(".project-entry:last").append(HTMLprojectDates.replace("%data%",curProject.dates));
+        $(".project-entry:last").append(HTMLprojectDescription.replace("%data%",curProject.description));
+        $.each(curProject.images, function(ik,iv){
+          $(".project-entry:last").append(HTMLprojectImage.replace("%data%",iv.url));
+        });
+        curProject = null;
+      }
+    },
+    {
+      title: "Resume",
+      dates: "Feb 2016",
+      description: "Resume Project# 2: Front-End Developer, Udacity",
+      images: [
+        {
+          url: "images/fry.jpg"
+        },
+        {
+          url: "images/197x148.gif"
+        }
+      ],
+      display: function(idx){
+        var curProject = projects.project[idx];
+        $("#projects").append(HTMLprojectStart);
+        $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",curProject.title));
+        $(".project-entry:last").append(HTMLprojectDates.replace("%data%",curProject.dates));
+        $(".project-entry:last").append(HTMLprojectDescription.replace("%data%",curProject.description));
+        $.each(curProject.images, function(ik,iv){
+          $(".project-entry:last").append(HTMLprojectImage.replace("%data%",iv.url));
+        });
+        curProject = null;
+      }
+    }
+  ]
+};
+
 // functions
 function locationizer(oWork){
   var arrLocations = [];
@@ -168,7 +179,9 @@ bio.display();
 work.display();
 
 // Display Projects
-projects.display();
+$.each(projects.project, function(idx,obj){
+  obj.display(idx);
+});
 
 // Education Projects
 education.display();
