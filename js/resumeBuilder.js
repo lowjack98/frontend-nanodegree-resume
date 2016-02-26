@@ -93,7 +93,7 @@ var work = {
   ],
   display: function(){
     $.each(work.jobs, function(pk,pv){
-      $("#work").append(HTMLworkStart);
+      $("#workExperience").append(HTMLworkStart);
       $(".work-entry:last").append(HTMLworkEmployer.replace("%data%",pv.employer) + HTMLworkTitle.replace("%data%",pv.title));
       $(".work-entry:last").append(HTMLworkDates.replace("%data%",pv.dates));
       $(".work-entry:last").append(HTMLworkLocation.replace("%data%",pv.location));
@@ -109,47 +109,29 @@ var projects = {
       dates: "Jan 2016",
       description: "Portfolio Project# 1: Front-End Developer, Udacity",
       images: [
-        {
-          url: "images/fry.jpg"
-        }
-      ],
-      display: function(idx){
-        var curProject = projects.project[idx];
-        $("#projects").append(HTMLprojectStart);
-        $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",curProject.title));
-        $(".project-entry:last").append(HTMLprojectDates.replace("%data%",curProject.dates));
-        $(".project-entry:last").append(HTMLprojectDescription.replace("%data%",curProject.description));
-        $.each(curProject.images, function(ik,iv){
-          $(".project-entry:last").append(HTMLprojectImage.replace("%data%",iv.url));
-        });
-        curProject = null;
-      }
+        "images/fry.jpg"
+      ]
     },
     {
       title: "Resume",
       dates: "Feb 2016",
       description: "Resume Project# 2: Front-End Developer, Udacity",
       images: [
-        {
-          url: "images/fry.jpg"
-        },
-        {
-          url: "images/197x148.gif"
-        }
-      ],
-      display: function(idx){
-        var curProject = projects.project[idx];
-        $("#projects").append(HTMLprojectStart);
-        $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",curProject.title));
-        $(".project-entry:last").append(HTMLprojectDates.replace("%data%",curProject.dates));
-        $(".project-entry:last").append(HTMLprojectDescription.replace("%data%",curProject.description));
-        $.each(curProject.images, function(ik,iv){
-          $(".project-entry:last").append(HTMLprojectImage.replace("%data%",iv.url));
-        });
-        curProject = null;
-      }
+        "images/fry.jpg", "images/197x148.gif"
+      ]
     }
-  ]
+  ],
+  display: function(){
+    $.each(projects.project, function(pk,pv){
+      $("#projects").append(HTMLprojectStart);
+      $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",pv.title));
+      $(".project-entry:last").append(HTMLprojectDates.replace("%data%",pv.dates));
+      $(".project-entry:last").append(HTMLprojectDescription.replace("%data%",pv.description));
+      $.each(pv.images, function(ik,iv){
+        $(".project-entry:last").append(HTMLprojectImage.replace("%data%",iv));
+      });
+    });
+  }
 };
 
 // functions
@@ -179,9 +161,7 @@ bio.display();
 work.display();
 
 // Display Projects
-$.each(projects.project, function(idx,obj){
-  obj.display(idx);
-});
+projects.display();
 
 // Education Projects
 education.display();
