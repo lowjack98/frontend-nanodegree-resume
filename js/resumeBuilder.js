@@ -10,7 +10,7 @@ var bio = {
     "twitter": "@jaylowack",
     "location": "Fort Worth, TX US",
     },
-  "welomeMessage": "What's up fellow Udacians?",
+  "welcomeMessage": "What's up fellow Udacians?",
   "skills": [
     "awesomeness", "delivering things", "cryogenic sleep", "saving the universe"
   ],
@@ -27,7 +27,7 @@ var bio = {
     $("#footerContacts").prepend(contactList);
     contactList = null;
     $("#header").append(HTMLbioPic.replace("%data%",bio.biopic));
-    $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welomeMessage));
+    $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
     if(bio.skills.length > 0){
       $("#header").append(HTMLskillsStart.replace("flex-box",""));
       bio.skills.forEach( function (skill){
@@ -44,7 +44,7 @@ var education = {
       "location": "College Station, TX, US",
       "degree": "BS",
       "majors": ["Mechanical Engineering"],
-      "dates": 1999,
+      "dates": "1999",
       "url": "http://example.com"
     }
   ],
@@ -103,7 +103,7 @@ var work = {
 };
 
 var projects = {
-  project: [
+  projects: [
     {
       title: "Portfolio",
       dates: "Jan 2016",
@@ -122,7 +122,7 @@ var projects = {
     }
   ],
   display: function(){
-    $.each(projects.project, function(pk,pv){
+    $.each(projects.projects, function(pk,pv){
       $("#projects").append(HTMLprojectStart);
       $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",pv.title));
       $(".project-entry:last").append(HTMLprojectDates.replace("%data%",pv.dates));
